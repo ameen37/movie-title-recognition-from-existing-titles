@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Title Lookup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Title Lookup</h1>
+        <form method="POST">
+            <label for="new_title">Enter a Movie Title:</label>
+            <input type="text" id="new_title" name="new_title" placeholder="Type your title here..." required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if movie %}
+            {% if movie != "Movie not found in database." %}
+                <div class="movie-details">
+                    <h2>{{ movie.title }}</h2>
+                    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                    <p><strong>Star Cast:</strong> {{ movie.star_cast }}</p>
+                    <p><strong>Director:</strong> {{ movie.director }}</p>
+                    <img src="{{ movie.poster_path }}" alt="Movie Poster" class="movie-poster">
+                </div>
+            {% else %}
+                <p class="not-found">{{ movie }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
